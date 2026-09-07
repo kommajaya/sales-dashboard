@@ -36,6 +36,7 @@
   header.top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
   h1{font-size:22px;font-weight:650;margin:0;background:var(--s1);color:#fff;padding:10px 16px;border-radius:6px;display:inline-block}
   .sub{color:var(--muted);font-size:13px;margin-top:2px}
+  .report-desc{color:var(--muted);font-size:12.5px;line-height:1.5;max-width:820px;margin:8px 0 0}
   .topctrl{display:flex;gap:8px;align-items:center}
   .btn{border:1px solid var(--baseline);background:var(--surface-1);color:var(--primary);border-radius:8px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
   .btn:hover{background:var(--surface-2)}
