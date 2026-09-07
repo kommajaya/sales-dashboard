@@ -1,4 +1,4 @@
-import { Component, signal, computed, OnInit } from '@angular/core';
+import { Component, signal, computed, OnInit, afterNextRender } from '@angular/core';
 import { DecimalPipe, CurrencyPipe } from '@angular/common';
 import { DataService } from './data.service';
 import { AggService } from './agg.service';
@@ -38,7 +38,12 @@ export class AppComponent implements OnInit {
     public data: DataService,
     private agg: AggService,
     public theme: ThemeService
-  ) {}
+  ) {
+    afterNextRender(() => {
+      const sel = document.querySelector<HTMLSelectElement>('.theme-select');
+      if (sel) sel.value = this.theme.theme();
+    });
+  }
 
   ngOnInit(): void {
     const filters: Record<string, string> = {};
@@ -88,8 +93,8 @@ export class AppComponent implements OnInit {
     this.refresh();
   }
 
-  toggleTheme(): void {
-    this.theme.toggle();
+  setTheme(name: string): void {
+    this.theme.set(name as any);
     this.refresh();
   }
 

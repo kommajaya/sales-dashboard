@@ -5,7 +5,11 @@
       <p class="report-desc">Interactive overview of retail sales performance — revenue, gross profit, order volume, and customer activity — broken down by channel, category, product, brand, color, country, and store size across four pages. Use the tabs to switch between Executive Summary, Product Analysis, Store Analysis, and Sales Comparison, and the filters above to narrow any view.</p>
     </div>
     <div class="topctrl">
-      <button class="btn" (click)="toggleTheme()">{{theme.label()}}</button>
+      <select class="theme-select" [value]="theme.theme()" (change)="setTheme($any($event.target).value)">
+        @for (t of theme.themes; track t) {
+          <option [value]="t">{{t}}</option>
+        }
+      </select>
     </div>
   </header>
 
