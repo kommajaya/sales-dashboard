@@ -1,0 +1,110 @@
+<div class="shell">
+  <header class="top">
+    <div><h1>Retail Sales Dashboard</h1></div>
+    <div class="topctrl">
+      <button class="btn" (click)="toggleTheme()">{{theme.label()}}</button>
+    </div>
+  </header>
+
+  <nav class="pages">
+    @for (p of pages; track p.id) {
+      <button class="tab" [class.active]="p.id === pageId()" (click)="setPage(p.id)">{{p.name}}</button>
+    }
+  </nav>
+
+  @if (loading()) {
+    <p class="scope">Loading data...</p>
+  }
+
+  @if (!loading()) {
+    <div class="filters">
+      @for (s of data.SLICERS; track s.key) {
+        <div>
+          <label class="flabel">{{s.label}}</label>
+          <select [value]="filter()[s.key]" (change)="updateFilter(s.key, $any($event.target).value)">
+            @for (o of s.opts(); track o) {
+              <option [value]="o">{{o}}</option>
+            }
+          </select>
+        </div>
+      }
+      <button class="btn reset" (click)="resetFilters()">Reset filters</button>
+    </div>
+
+    <p class="scope">
+      <b>{{rowCount() | number}}</b> sales lines &middot;
+      <b>{{sum().orders | number}}</b> orders &middot;
+      <b>{{sum().sales | currency:'USD':'symbol':'1.0-0'}}</b> in sales
+      @if (allFiltered()) {
+        &middot; no filters applied
+      }
+    </p>
+
+    @if (view()) {
+      <div class="kpis">
+        @for (k of view()!.kpis; track k.label) {
+          <div class="kpi" [class.hero]="k.hero">
+            <div class="accent" [style.background]="k.color"></div>
+            <div class="val">{{k.value}}</div>
+            <div class="lab">{{k.label}}</div>
+          </div>
+        }
+      </div>
+
+      @for (row of view()!.gridrows; track $index) {
+        <div class="gridrow">
+          @for (card of row; track $index) {
+            <div class="card">
+              <h3>{{card.title}}</h3>
+              @if (card.sub) {
+                <div class="subtitle">{{card.sub}}</div>
+              }
+
+              @switch (card.type) {
+                @case ('hbar') {
+                  <app-hbar [items]="card.items || []" [color]="card.color || ''" [fmt]="card.fmt || 'money'"></app-hbar>
+                }
+                @case ('col') {
+                  <app-colchart [cats]="card.cats || []" [series]="card.series || []" [fmt]="card.fmt || 'money'"></app-colchart>
+                }
+                @case ('line') {
+                  <app-linechart [keys]="card.keys || []" [series]="card.series || []" [fmt]="card.fmt || 'money'"></app-linechart>
+                }
+                @case ('yoy') {
+                  <app-yoychart [keys]="card.keys || []" [values]="card.values || []" [fmt]="card.fmt || 'pct'"></app-yoychart>
+                }
+                @case ('donut') {
+                  <app-donut [segments]="card.segments || []" [total]="card.total || 0" [fmt]="card.fmt || 'money'"></app-donut>
+                }
+                @case ('table') {
+                  <table class="data">
+                    <thead>
+                      <tr>
+                        @for (c of card.cols || []; track c) {
+                          <th>{{c}}</th>
+                        }
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (row of card.rows || []; track $index) {
+                        <tr>
+                          @for (v of row; track $index) {
+                            <td>{{v}}</td>
+                          }
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                }
+              }
+            </div>
+          }
+        </div>
+      }
+    }
+  }
+
+  <footer>Retail Sales Dashboard &middot; Angular 19 + D3</footer>
+</div>
+
+<div class="tooltip" id="tip"></div>
