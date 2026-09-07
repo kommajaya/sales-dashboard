@@ -30,6 +30,54 @@
     --s5:#d55181; --s6:#008300; --s7:#9085e9; --s8:#e66767;
     --other:#5f5e59;
   }
+  html[data-theme="ocean"]{
+    color-scheme: dark;
+    --page:      #0b1929;
+    --surface-1: #112438;
+    --surface-2: #18304a;
+    --primary:   #e4eef7;
+    --secondary: #8ba8c4;
+    --muted:     #5b7d99;
+    --gridline:  #1c3352;
+    --baseline:  #2a4a6b;
+    --border:    rgba(140,180,220,0.12);
+    --ok:        #00c4a0;
+    --s1:#3d94e6; --s2:#e8a040; --s3:#1abc9c; --s4:#5eaff5;
+    --s5:#d4607a; --s6:#0ea5a0; --s7:#7b6ed4; --s8:#e87070;
+    --other:#3a5574;
+  }
+  html[data-theme="forest"]{
+    color-scheme: dark;
+    --page:      #0c1a12;
+    --surface-1: #122218;
+    --surface-2: #1a2e22;
+    --primary:   #e8f0e8;
+    --secondary: #9ab89a;
+    --muted:     #6a8a6a;
+    --gridline:  #1e3426;
+    --baseline:  #2a4834;
+    --border:    rgba(120,180,130,0.12);
+    --ok:        #40c060;
+    --s1:#4caf50; --s2:#d4a030; --s3:#2e9e6e; --s4:#c07030;
+    --s5:#8bb848; --s6:#b86040; --s7:#6a9ad0; --s8:#d85050;
+    --other:#3a5a3a;
+  }
+  html[data-theme="sunset"]{
+    color-scheme: dark;
+    --page:      #1a0f0a;
+    --surface-1: #241610;
+    --surface-2: #2e1e16;
+    --primary:   #f5ede4;
+    --secondary: #c4a890;
+    --muted:     #8a7560;
+    --gridline:  #3a2a20;
+    --baseline:  #4a3828;
+    --border:    rgba(200,160,120,0.12);
+    --ok:        #50c070;
+    --s1:#e88030; --s2:#d4a020; --s3:#e05050; --s4:#f0c040;
+    --s5:#c85080; --s6:#e8a050; --s7:#30a8a0; --s8:#a060d0;
+    --other:#5a4a3a;
+  }
   *{box-sizing:border-box}
   body{margin:0;background:var(--page);color:var(--primary);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px;line-height:1.4}
   .shell{max-width:1280px;margin:0 auto;padding:20px 24px 60px}
@@ -40,6 +88,7 @@
   .topctrl{display:flex;gap:8px;align-items:center}
   .btn{border:1px solid var(--baseline);background:var(--surface-1);color:var(--primary);border-radius:8px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
   .btn:hover{background:var(--surface-2)}
+  .theme-select{border:1px solid var(--baseline);background:var(--surface-1);color:var(--primary);border-radius:7px;padding:6px 10px;font:inherit;font-size:13px;cursor:pointer}
   nav.pages{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
   .tab{border:1px solid var(--baseline);background:var(--surface-1);color:var(--secondary);padding:8px 16px;border-radius:9px;font:inherit;font-size:14px;cursor:pointer}
   .tab.active{background:var(--s1);border-color:var(--s1);color:#fff;font-weight:600}
